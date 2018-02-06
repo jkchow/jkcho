@@ -6,9 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class LambdaTest {
-
 	public static void main(String[] args) {
-
 		Formula formula = new Formula() {
 			@Override
 			public double calculate(int a) {
@@ -76,21 +74,46 @@ public class LambdaTest {
 		};
 		String convert2 = converter3.convert("hello");
 		System.out.println(convert2);
-		//:: 构造方法Person::new 来创建一个Person类构造函数的引用。
-		//Java编译器会自动地选择合适的构造函数来匹配PersonFactory.create函数的签名，并选择正确的构造函数形式
+		// :: 构造方法Person::new 来创建一个Person类构造函数的引用。
+		// Java编译器会自动地选择合适的构造函数来匹配PersonFactory.create函数的签名，并选择正确的构造函数形式
 		PersonFactory<Person> personFactory = Person::new;
 		Person person = personFactory.create("振", "周");
 		System.out.println(person);
+		
+		//Lambda的范围,对于lambda表达式外部的变量，其访问权限的粒度与匿名对象的方式非常类似。你能够访问局部对应的外部区域的局部final变量，以及成员变量和静态变量。
+		//对于lambda表达式外部的变量，其访问权限的粒度与匿名对象的方式非常类似。
+		//你能够访问局部对应的外部区域的局部final变量，以及成员变量和静态变量
 		/**
-		 * Lambda的范围
-		 * 访问局部变量
+		 * 访问局部变量, 在 lambda 表达式内部企图改变num的值也是不允许的{num=1;return
+		 * String.valueOf(from+num);}
 		 */
-		final int num=1;
-		Converter<Integer,String> stringConverter=(from)->String.valueOf(from+num);
-		String convert3 = stringConverter.convert(5) ;
+		int num = 1;// 允许去掉final num 在编译的时候被隐式地当做 final 变量来处理，
+		Converter<Integer, String> stringConverter = (from) -> String.valueOf(from + num);
+		String convert3 = stringConverter.convert(5);
 		System.out.println(convert3);
+		/**
+		 * 访问成员变量与静态变量
+		 * 在下面一个类Lambda4  示例，
+		 */
+
 	}
 
+}
+/*
+	访问成员变量和静态变量
+	与局部变量不同，
+	我们在lambda表达式的内部能获取到对成员变量或静态变量的读写权。这种访问行为在匿名对象里是非常典型的。
+ */
+class Lambda4 {
+	static int outerStaticNum;
+	int outerNum;
+	void testScopes(){
+		Converter<Integer,String> stringConverter=(from)->{
+			outerNum=1;
+			outerStaticNum=2;//直接获取对成员变量的读写权。
+			return String.valueOf(from);};
+	}
+	
 }
 
 class Something {
@@ -98,6 +121,7 @@ class Something {
 		return String.valueOf(s.charAt(0));
 	}
 }
+
 class Person {
 	String firstName;
 	String lastName;
@@ -109,9 +133,10 @@ class Person {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
 	@Override
 	public String toString() {
-		return this.lastName+this.firstName;
+		return this.lastName + this.firstName;
 	}
 }
 
