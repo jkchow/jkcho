@@ -1,5 +1,8 @@
 package lambda;
-
+//@FunctionalInterface
 public interface Converter<T, F> {
-	T convert(F from);
+	F convert(T from);
+	default void eat() {
+		System.out.println("chi");
+	}
 }

@@ -1,6 +1,5 @@
 package lambda;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,11 +47,54 @@ public class LambdaTest {
 		Collections.sort(names, (String a, String b) -> a.compareTo(b));
 		// 再简洁
 		Collections.sort(names, (a, b) -> a.compareTo(b));
-		Comparator<String> comparator2=(a, b) -> a.compareTo(b);
-		//自定义函数式接口，
-		Converter<Integer,String> converter =(from) -> Integer.valueOf(from);
+		Comparator<String> comparator2 = (a, b) -> a.compareTo(b);
+		// 自定义函数式接口，如果Converter你不写 @FunctionalInterface 注解，程序也是正确的
+		// 任意只包含一个抽象方法的接口，我们都可以用来做成lambda表达式
+		Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
+		converter.eat();
 		Integer convert = converter.convert("123");
 		System.out.println(convert);
+		// 上面的代码实例可以通过静态方法引用，使之更加简洁：
+		Converter<String, Integer> converter1 = Integer::valueOf;
+		// Java 8 允许你通过 :: 关键字获取方法或者构造函数的的引用。
+		// 上面的例子就演示了如何引用一个静态方法。而且，我们还可以对一个对象的方法进行引用：
+		Something something = new Something();
+		Converter<String, String> converter2 = something::startsWith;
+		String converted = converter2.convert("Java");
+		System.out.println(converted);
+		// 如下理解
+		Converter<String, String> converter3 = new Converter<String, String>() {
+			@Override
+			public String convert(String from) {
+				String startsWith = something.startsWith(from);
+				return startsWith;
+			}
+
+		};
+		String convert2 = converter3.convert("hello");
+		System.out.println(convert2);
 	}
 
+}
+
+class Something {
+	String startsWith(String s) {
+		return String.valueOf(s.charAt(0));
+	}
+}
+class Person {
+	String firstName;
+	String lastName;
+
+	Person() {
+	}
+
+	Person(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+}
+
+interface PersonFactory<P extends Person> {
+	P create(String firstName, String lastName);
 }
