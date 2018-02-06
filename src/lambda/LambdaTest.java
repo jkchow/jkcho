@@ -55,6 +55,9 @@ public class LambdaTest {
 		Integer convert = converter.convert("123");
 		System.out.println(convert);
 		// 上面的代码实例可以通过静态方法引用，使之更加简洁：
+		/**
+		 * 方法和构造函数引用
+		 */
 		Converter<String, Integer> converter1 = Integer::valueOf;
 		// Java 8 允许你通过 :: 关键字获取方法或者构造函数的的引用。
 		// 上面的例子就演示了如何引用一个静态方法。而且，我们还可以对一个对象的方法进行引用：
@@ -73,6 +76,19 @@ public class LambdaTest {
 		};
 		String convert2 = converter3.convert("hello");
 		System.out.println(convert2);
+		//:: 构造方法Person::new 来创建一个Person类构造函数的引用。
+		//Java编译器会自动地选择合适的构造函数来匹配PersonFactory.create函数的签名，并选择正确的构造函数形式
+		PersonFactory<Person> personFactory = Person::new;
+		Person person = personFactory.create("振", "周");
+		System.out.println(person);
+		/**
+		 * Lambda的范围
+		 * 访问局部变量
+		 */
+		final int num=1;
+		Converter<Integer,String> stringConverter=(from)->String.valueOf(from+num);
+		String convert3 = stringConverter.convert(5) ;
+		System.out.println(convert3);
 	}
 
 }
@@ -92,6 +108,10 @@ class Person {
 	Person(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+	@Override
+	public String toString() {
+		return this.lastName+this.firstName;
 	}
 }
 
