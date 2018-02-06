@@ -30,7 +30,8 @@ public class FileTest {
 		      System.out.println(str);
 		   }
 		br.close();
-
+		File file = new File("");
+		System.out.println(file.isFile());
 	}
 
 }
