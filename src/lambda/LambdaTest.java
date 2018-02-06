@@ -46,11 +46,13 @@ public class LambdaTest {
 		System.out.println("第三次排序>>>" + names);
 		// 简洁
 		Collections.sort(names, (String a, String b) -> a.compareTo(b));
-		System.out.println("第四次排序>>>" + names);
 		// 再简洁
 		Collections.sort(names, (a, b) -> a.compareTo(b));
-		System.out.println("第四次排序>>>" + names);
-
+		Comparator<String> comparator2=(a, b) -> a.compareTo(b);
+		//自定义函数式接口，
+		Converter<Integer,String> converter =(from) -> Integer.valueOf(from);
+		Integer convert = converter.convert("123");
+		System.out.println(convert);
 	}
 
 }
