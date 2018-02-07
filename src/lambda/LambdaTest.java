@@ -112,6 +112,7 @@ public class LambdaTest {
 		System.out.println(predicate.test("foo"));
 		System.out.println(predicate.negate().test("foo"));
 		
+		
 	}
 
 }
