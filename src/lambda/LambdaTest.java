@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class LambdaTest {
@@ -112,6 +113,12 @@ public class LambdaTest {
 		System.out.println(predicate.test("foo"));
 		System.out.println(predicate.negate().test("foo"));
 		
+		Predicate<Boolean> nonNull = Objects::nonNull;
+		Predicate<Boolean> nonNull1=(s) ->Objects.nonNull(s);
+		boolean test = nonNull.test(false);
+		System.out.println(test);
+		System.out.println(nonNull1.test(false));
+		Predicate<Boolean> isNull = Objects::isNull;
 		
 	}
 
