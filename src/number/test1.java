@@ -8,7 +8,7 @@ public class test1 {
 		NumberFormat num = NumberFormat.getPercentInstance(); 
 		num.setMaximumIntegerDigits(3); 
 		num.setMaximumFractionDigits(2); 
-		double csdn = 0.2049544; 
+		double csdn = 0.2099544; 
 		System.out.println(num.format(csdn));
 
 	}
