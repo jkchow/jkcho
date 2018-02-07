@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class LambdaTest {
 	public static void main(String[] args) {
@@ -17,7 +18,11 @@ public class LambdaTest {
 		double sqrt = formula.sqrt(16);
 		System.out.println(calculate);
 		System.out.println(sqrt);
-
+		Formula formula1 = (c) -> c* 100;
+		double calculate2 = formula1.calculate(11);
+		double sqrt2 = formula1.sqrt(121);
+		System.out.println(calculate2);
+		System.out.println(sqrt2);
 		// java8以前
 		/*
 		 * 静态工具方法Collections.sort接受一个list，和一个Comparator接口作为输入参数，
@@ -95,7 +100,18 @@ public class LambdaTest {
 		 * 访问成员变量与静态变量
 		 * 在下面一个类Lambda4  示例，
 		 */
-
+		//接口Formula定义了一个默认的方法sqrt，该方法能够访问formula所有的对象实例，包括匿名对象。这个对lambda表达式来讲则无效。
+		//默认方法无法在lambda表达式内部被访问。因此下面的代码是无法通过编译的
+		//Formula formula = (a) -> sqrt( a * 100);
+		/*
+		 * Predicates
+		 * 是一个布尔类型的函数，该函数只有一个输入参数。
+		 * Predicate接口包含了多种默认方法，用于处理复杂的逻辑动词（and, or，negate）
+		 */
+		Predicate<String> predicate = (s) -> s.length() > 0;
+		System.out.println(predicate.test("foo"));
+		System.out.println(predicate.negate().test("foo"));
+		
 	}
 
 }
