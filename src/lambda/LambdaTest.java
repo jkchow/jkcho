@@ -119,7 +119,7 @@ public class LambdaTest {
 		System.out.println(test);
 		System.out.println(nonNull1.test(false));
 		Predicate<Boolean> isNull = Objects::isNull;
-		
+		//syso
 	}
 
 }
