@@ -11,13 +11,13 @@ import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
 public class Customer {
-	private final static String QUEUE_NAME = "rabbit.test";//必须生产者一直
+	private final static String QUEUE_NAME = "rabbit.test";// 必须生产者一直
 
 	public static void main(String[] args) throws Exception {
 		// 创建连接工厂
 		ConnectionFactory factory = new ConnectionFactory();
 		// 设置RabbitMQ地址
-		factory.setHost("localhost");
+		//factory.setHost("localhost");
 		// 创建一个新的连接
 		Connection connection = factory.newConnection();
 		// 创建一个通道

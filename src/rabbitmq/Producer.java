@@ -42,9 +42,11 @@ public class Producer {
 		for (int i = 0; i < 5; i++) {
 			StringBuffer sb=new StringBuffer(message);
 			sb.append(i);
+//			Thread.sleep(5000);
 			channel.basicPublish("", QUEUE_NAME, null, sb.toString().getBytes("UTF-8"));
+			System.out.println("Producer Send +'" + sb + "'");
 		}
-		System.out.println("Producer Send +'" + message + "'");
+//		System.out.println("Producer Send +'" + message + "'");
 		channel.close();
 		connection.close();
 	}
