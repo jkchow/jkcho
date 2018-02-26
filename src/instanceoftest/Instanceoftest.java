@@ -27,14 +27,10 @@ public class Instanceoftest {
 		System.out.println("\ninstanceoftest test case 2: ------------------");
 		a = new B();
 		b = new B();
-		
-		
-		
 
 		res = a instanceof A;
 		System.out.println("a instanceof A: " + res);
 
-		
 		res = a instanceof B;
 		System.out.println("a instanceof B: " + res);
 
