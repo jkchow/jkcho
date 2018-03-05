@@ -34,6 +34,10 @@ public class test1 {
 		ab.add("123");
 		ab.add("1235");
 		System.out.println(ab);
+		double abg=Math.random()*10000;
+		int abgg=(int)abg;
+		System.out.println(abg);
+		System.out.println(abgg);
 		
 	}
 
