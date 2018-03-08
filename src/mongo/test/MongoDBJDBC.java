@@ -12,7 +12,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
-
+//    mongod --config "D:\Development\Mongo\mongo.conf"
 public class MongoDBJDBC {
 	
 	public static void main( String args[] ){
@@ -21,7 +21,7 @@ public class MongoDBJDBC {
 	         MongoClient mongoClient = new MongoClient( "localhost" , 27017);
 	         
 	         // 连接到数据库
-	         MongoDatabase mongoDatabase = mongoClient.getDatabase("mycol");  
+	         MongoDatabase mongoDatabase = mongoClient.getDatabase("mycol1");  
 	         System.out.println("Connect to database successfully");
 	         
 	         MongoCollection<Document> collection = mongoDatabase.getCollection("test");
