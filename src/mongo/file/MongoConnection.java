@@ -10,7 +10,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoConnection {
   /*   
-    //数据库连接实例
+    //数据库连接实例 不带验证
   	ServerAddress address = new ServerAddress(hostNameOrIp, port);
       mongoClient = new MongoClient(address, myOptions);   
   	
@@ -39,7 +39,6 @@ public class MongoConnection {
                   
                 //通过连接认证获取MongoDB连接  
                 MongoClient mongoClient = new MongoClient(addrs,credentials);  
-                  
                 //连接到数据库  
                 MongoDatabase mongoDatabase = mongoClient.getDatabase("databaseName");  
                 System.out.println("连接成功");  
